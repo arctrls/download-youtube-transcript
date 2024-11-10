@@ -10,6 +10,6 @@ fi
 youtube_url="$1"
 
 # Python 스크립트 실행 후 결과를 받아서 클립보드에 복사
-/Users/jake/youtube-transcript/.venv/bin/python /Users/jake/youtube-transcript/script.py "$youtube_url" | while read filename; do
+/Users/jake/llm-recipes/download-youtube-transcript/.venv/bin/python /Users/jake/llm-recipes/download-youtube-transcript/script.py "$youtube_url" | while read filename; do
 osascript -e "tell application \"Finder\" to set the clipboard to (POSIX file \"${filename}\")"
 done
