@@ -25,12 +25,13 @@ def download_subtitle(video_url, language='en'):
             raise ValueError("올바른 YouTube URL이 아닙니다.")
 
         # 자막 가져오기
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=[language])
+        api = YouTubeTranscriptApi()
+        transcript = api.fetch(video_id, languages=[language])
 
         # 텍스트 파일로 저장
-        for entry in transcript:
-            start_time = int(entry['start'])
-            text = entry['text'].replace('\n', ' ')
+        for snippet in transcript.snippets:
+            start_time = int(snippet.start)
+            text = snippet.text.replace('\n', ' ')
             minutes = start_time // 60
             seconds = start_time % 60
             print(f"[{minutes:02d}:{seconds:02d}] {text}")
